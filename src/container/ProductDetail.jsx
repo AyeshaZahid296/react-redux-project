@@ -9,7 +9,7 @@ const ProductDetail = () => {
     const product = useSelector((state) => state.product);
     const { productId } = useParams();
     const dispatch = useDispatch();
-    console.log(productId);
+    console.log(product);
 
     const fetchProductDetail = () => {
         const response = await axios
@@ -19,7 +19,11 @@ const ProductDetail = () => {
 
             })
         dispatch(selectedProducts(response.data))
+
     }
+    useEffect(() => {
+        if (productId && productId !== "") fetchProductDetail();
+    }, [productId]);
     return (
         <div>
             <h1>
